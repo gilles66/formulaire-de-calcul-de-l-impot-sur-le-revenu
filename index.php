@@ -118,7 +118,7 @@ if ( isset( $_POST['montant_du_revenu'] ) ) {
                             <td>
                                 <?php
                                 if ( $infos['max'] !== MAX_REVENU) {
-	                                echo 'De ' . format_euros( $infos['min'] ) . ' à ' . format_euros( $infos['max'] ) . ' €';
+	                                echo '' . format_euros( $infos['min'] ) . ' - ' . format_euros( $infos['max'] ) . ' €';
                                 }
                                 else {
 	                                echo 'Au delà de ' . format_euros( $infos['min'] ) . ' €';
@@ -138,6 +138,14 @@ if ( isset( $_POST['montant_du_revenu'] ) ) {
 	                    <?php
                     }
                     ?>
+                        <tr>
+                            <td colspan="3" class="text-right font-weight-bold">
+                                Montant total de votre impôt :
+                            </td>
+                            <td>
+			                    <?php echo '<strong>' . format_euros( $montant_total_de_l_impot ) . ' €</strong>'; ?>
+                            </td>
+                        </tr>
                     <?php
 	                ?>
                     </table>
