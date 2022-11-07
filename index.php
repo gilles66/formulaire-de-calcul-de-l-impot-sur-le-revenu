@@ -110,12 +110,17 @@ if ( isset( $_POST['montant_du_revenu'] ) ) {
 	                        echo '<h3>Au delà de ' . format_euros( $infos['min'] ) . ' €.</h3>';
                         }
                         echo 'Montant imposable de cette tranche : ' . format_euros( $infos['montant_imposable_de_cette_tranche'] ) . ' €.<br />';
-                        echo 'Imposition de cette tranche (' . $infos['taux'] . '%): ' . format_euros( $infos['imposition_de_cette_tranche'] ) . ' €.<br />';
+                        echo 'Imposition de cette tranche (<span style="color:red;">' . $infos['taux'] . '%</span>): ' . format_euros( $infos['imposition_de_cette_tranche'] ) . ' €.<br />';
                         echo  '<hr />';
                     }
                     ?>
                     <div class="alert alert-success" role="alert">
-                        <?php echo 'Montant total de votre impôt : <strong>' . format_euros( $montant_total_de_l_impot ) . ' €</strong>'; ?>
+                        <?php
+
+                        echo 'Montant total de votre impôt : <strong>' . format_euros( $montant_total_de_l_impot ) . ' €</strong><br />';
+                        echo 'Soit un taux global de  : <strong>' . format_euros( ( $montant_total_de_l_impot / $_POST['montant_du_revenu'] ) * 100 ) . ' %.</strong>';
+
+                        ?>
                     </div>
                     <?php
                 }
