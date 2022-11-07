@@ -78,6 +78,17 @@ if ( isset( $_POST['montant_du_revenu'] ) ) {
                 </form>
                 <?php
                 if ( isset( $_POST['montant_du_revenu'] ) ) {
+	                echo '<h2 class="mt-5 mb-4">Résultat du calcul</h2>';
+                    ?>
+                    <table class="table">
+                        <tr>
+                            <th>Tranche</th>
+                            <th>Montant imposable</th>
+                            <th>Taux d'imposition</th>
+                            <th>Imposition</th>
+                        </tr>
+                    <?php
+
                     foreach ( $tableau_des_tranches as $key => $infos ) {
 
                         $montant_de_la_tranche = $infos['max'] - $infos['min'];
@@ -98,31 +109,47 @@ if ( isset( $_POST['montant_du_revenu'] ) ) {
 
                         }
                     }
-                    echo '<h2 class="mt-5 mb-4"><u>Résultat du calcul</u></h2>';
                     $c = $montant_total_de_l_impot = 0;
                     foreach ( $tableau_des_tranches as $key => $infos ) {
-                        $c++;
-                        $montant_total_de_l_impot+= $infos['imposition_de_cette_tranche'];
-                        if ( $infos['max'] !== MAX_REVENU) {
-	                        echo '<h3>Tranche ' . $c . ' : de ' . format_euros( $infos['min'] ) . ' à ' . format_euros( $infos['max'] ) . ' €.</h3>';
-                        }
-                        else {
-	                        echo '<h3>Au delà de ' . format_euros( $infos['min'] ) . ' €.</h3>';
-                        }
-                        echo 'Montant imposable de cette tranche : ' . format_euros( $infos['montant_imposable_de_cette_tranche'] ) . ' €.<br />';
-                        echo 'Imposition de cette tranche (<span style="color:red;">' . $infos['taux'] . '%</span>): ' . format_euros( $infos['imposition_de_cette_tranche'] ) . ' €.<br />';
-                        echo  '<hr />';
+	                    $montant_total_de_l_impot+= $infos['imposition_de_cette_tranche'];
+	                    $c++;
+                        ?>
+                        <tr>
+                            <td>
+                                <?php
+                                if ( $infos['max'] !== MAX_REVENU) {
+	                                echo 'De ' . format_euros( $infos['min'] ) . ' à ' . format_euros( $infos['max'] ) . ' €';
+                                }
+                                else {
+	                                echo 'Au delà de ' . format_euros( $infos['min'] ) . ' €';
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php echo format_euros( $infos['montant_imposable_de_cette_tranche'] ) . ' €'; ?>
+                            </td>
+                            <td>
+                                <?php echo '<span style="color:red;">' . $infos['taux'] . '%</span>'; ?>
+                            </td>
+                            <td>
+                                <?php echo format_euros( $infos['imposition_de_cette_tranche'] ) . ' €'; ?>
+                            </td>
+                        </tr>
+	                    <?php
                     }
                     ?>
-                    <div class="alert alert-success" role="alert">
-                        <?php
-
-                        echo 'Montant total de votre impôt : <strong>' . format_euros( $montant_total_de_l_impot ) . ' €</strong><br />';
-                        echo 'Soit un taux global de  : <strong>' . format_euros( ( $montant_total_de_l_impot / $_POST['montant_du_revenu'] ) * 100 ) . ' %.</strong>';
-
-                        ?>
-                    </div>
                     <?php
+	                ?>
+                    </table>
+                    <div class="alert alert-success" role="alert">
+		                <?php
+
+		                echo 'Montant total de votre impôt : <strong>' . format_euros( $montant_total_de_l_impot ) . ' €</strong><br />';
+		                echo 'Soit un taux global de  : <strong>' . format_euros( ( $montant_total_de_l_impot / $_POST['montant_du_revenu'] ) * 100 ) . ' %.</strong>';
+
+		                ?>
+                    </div>
+	                <?php
                 }
                 ?>
             </div><!--/.col-12-->
