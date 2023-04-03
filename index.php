@@ -27,33 +27,61 @@ $montant_du_revenu = 0;
 if ( isset( $_POST['montant_du_revenu'] ) ) {
 	define( 'MAX_REVENU', 9999999999 );
 	$montant_du_revenu    = $_POST['montant_du_revenu'];
-	$tableau_des_tranches = [
+//	$tableau_des_tranches_2021= [
+//		[
+//			'min'  => 0,
+//			'max'  => 10225,
+//			'taux' => 0
+//		],
+//		[
+//			'min'  => 10226,
+//			'max'  => 26070,
+//			'taux' => 11
+//		],
+//		[
+//			'min'  => 26071,
+//			'max'  => 74545,
+//			'taux' => 30
+//		],
+//		[
+//			'min'  => 74546,
+//			'max'  => 160336,
+//			'taux' => 41
+//		],
+//		[
+//			'min'  => 160336,
+//			'max'  => MAX_REVENU,
+//			'taux' => 45
+//		],
+//	];
+	$tableau_des_tranches_2022 = [
 		[
 			'min'  => 0,
-			'max'  => 10225,
+			'max'  => 10777,
 			'taux' => 0
 		],
 		[
-			'min'  => 10226,
-			'max'  => 26070,
+			'min'  => 10778,
+			'max'  => 27478,
 			'taux' => 11
 		],
 		[
-			'min'  => 26071,
-			'max'  => 74545,
+			'min'  => 27479,
+			'max'  => 78570,
 			'taux' => 30
 		],
 		[
-			'min'  => 74546,
-			'max'  => 160336,
+			'min'  => 78571,
+			'max'  => 168994,
 			'taux' => 41
 		],
 		[
-			'min'  => 160336,
+			'min'  => 168995,
 			'max'  => MAX_REVENU,
 			'taux' => 45
 		],
 	];
+	$tableau_des_tranches = $tableau_des_tranches_2022;
 }
 ?>
 <body>
